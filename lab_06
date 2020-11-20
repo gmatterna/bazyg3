@@ -1,0 +1,23 @@
+Zadanie 1
+pkt 1
+SELECT AVG(waga) from kreatura where rodzaj='wiking';
+pkt 2
+SELECT AVG(waga), rodzaj, count(nazwa) from kreatura group by rodzaj;
+pkt 3
+SELECT ROUND(2020-avg(YEAR(dataUr)),0) as wiek, rodzaj FROM kreatura GROUP BY rodzaj;
+
+Zadanie 2
+pkt 1
+SELECT count(rodzaj), sum(waga) from zasob group by rodzaj;
+pkt 2
+SELECT nazwa, AVG(waga) FROM zasob GROUP BY nazwa HAVING SUM(waga) > 10 AND SUM(ilosc) >= 4;
+pkt 3
+SELECT COUNT(DISTINCT(nazwa)),rodzaj FROM zasob where ilosc>1 GROUP BY rodzaj;
+
+Zadanie 3
+pkt 1
+SELECT k.nazwa, e.idZasobu, e.ilosc FROM kreatura AS k, ekwipunek AS e
+WHERE k.idKreatury = e.idKreatury;
+pkt 2
+SELECT k.nazwa, e.ilosc, z.nazwa FROM kreatura AS k, ekwipunek AS e, zasob AS z WHERE k.idKreatury = e.idKreatury AND e.idZasobu = z.idZasobu;
+pkt 3
