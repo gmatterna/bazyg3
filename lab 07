@@ -1,0 +1,10 @@
+Zadanie 1
+pkt 1
+CREATE TABLE uczestnicy SELECT * FROM wikingowie.uczestnicy;
+CREATE TABLE etapy_wyprawy SELECT * FROM wikingowie.etapy_wyprawy;
+CREATE TABLE sektor SELECT * FROM wikingowie.sektor;
+CREATE TABLE wyprawa SELECT * FROM wikingowie.wyprawa;
+pkt 2
+SELECT kreatura.nazwa, uczestnicy.id_uczestnika FROM kreatura LEFT JOIN uczestnicy ON uczestnicy.id_uczestnika=kreatura.Idkreatury where uczestnicy.id_uczestnika IS NULL;
+pkt 3
+SELECT w.nazwa, SUM(ilosc) FROM wyprawa AS w INNER JOIN uczestnicy AS u ON u.id_wyprawy=w.id_wyprawy INNER JOIN kreatura AS k ON u.id_uczestnika=k.idKreatury INNER JOIN ekwipunek AS e ON e.idKreatury=k.idKreatury GROUP BY w.nazwa;
