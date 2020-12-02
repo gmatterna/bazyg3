@@ -21,3 +21,13 @@ SELECT sektor.nazwa,COUNT(etapy_wyprawy.sektor) AS ilosc_odwiedzin FROM sektor L
 pkt 2
 SELECT DISTINCT(kreatura.nazwa),IF(uczestnicy.id_wyprawy IS NULL,"Nie bral udzialu w wyprawie","bral udzialu w wyprawie") FROM kreatura LEFT JOIN uczestnicy ON kreatura.Idkreatury=uczestnicy.id_uczestnika ORDER BY kreatura.nazwa;
 
+Zadanie 4
+pkt 1
+SELECT wyprawa.nazwa,SUM(LENGTH(etapy_wyprawy.dziennik)) from wyprawa,etapy_wyprawy where etapy_wyprawy.idWyprawy=wyprawa.id_wyprawy GROUP BY wyprawa.nazwa HAVING SUM(LENGTH(etapy_wyprawy.dziennik))<400; 
+pkt 2
+SELECT wyprawa.nazwa, SUM(zasob.waga*zasob.ilosc),COUNT(uczestnicy.id_uczestnika),SUM(zasob.waga*zasob.ilosc)/COUNT(uczestnicy.id_uczestnika) FROM wyprawa,kreatura,uczestnicy,ekwipunek,zasob WHERE uczestnicy.id_wyprawy=wyprawa.id_wyprawy AND uczestnicy.id_uczestnika=kreatura.Idkreatury AND kreatura.Idkreatury=ekwipunek.IdKreatury AND ekwipunek.idzasobu=zasob.idzasobu GROUP BY wyprawa.nazwa;
+
+Zadanie 5
+pkt 1
+SELECT k.nazwa, DATEDIFF(w.data_rozpoczecia, k.dataUr) AS wiek FROM wyprawa AS w JOIN uczestnicy AS u ON w.id_wyprawy = u.id_wyprawy JOIN kreatura AS k ON u.id_uczestnika = k.idKreatury JOIN etapy_wyprawy AS ew ON w.id_wyprawy=ew.idWyprawy WHERE ew.sektor = 7;
+
