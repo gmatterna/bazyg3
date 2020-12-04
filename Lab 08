@@ -1,0 +1,39 @@
+Zadanie 1
+pkt 1
+DELIMITER //
+CREATE TRIGGER kreatura_before_insert
+BEFORE INSERT ON kreatura
+FOR EACH ROW
+BEGIN
+IF NEW.waga > 0
+THEN
+SET NEW.waga = 0;
+END IF;
+END
+//
+DELIMITER ;
+
+Zadanie 2
+pkt 1
+DELIMITER //
+CREATE TRIGGER wyprawy_before_delete
+AFTER DELETE ON wyprawa
+FOR EACH ROW
+BEGIN
+INSERT INTO archiwum_wypraw SELECT old.w.id_wyprawy,old.w.nazwa,old.w.data_rozpoczecia,old.w.data_zakonczenia,old.k.nazwa FROM wyprawa AS w
+JOIN kreatura AS k ON u.id_uczestnik=k.idKreatury;
+END
+//
+DELIMITER ;
+Zadanie 3
+pkt 1
+DELIMITER \\
+CREATE PROCEDURE eliksir_sily(IN id int)
+BEGIN
+UPDATE kreatura SET udzwig = 1.2 * udzwig WHERE idKreatury = id;
+END
+\\
+DELIMITER ;
+
+pkt 2
+
