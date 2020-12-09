@@ -36,4 +36,58 @@ END
 DELIMITER ;
 
 pkt 2
+DELIMITER $$
+CREATE FUNCTION wielka(tekst varchar(100))
+RETURNS varchar(100)
+BEGIN
+DECLARE duze varchar(100);
+SELECT UPPER(tekst) into duze;
+RETURN duze;
+END
+$$
+DELIMITER ;
 
+Zadanie 4
+pkt 1
+DELIMITER $$
+CREATE TRIGGER uczestnicy_after_insert
+AFTER INSERT ON uczestnicy
+
+FOR EACH ROW
+BEGIN
+DECLARE ile_rekordow INTEGER;
+SELECT count(*) INTO ile_rekordow
+FROM kreatura k, wyprawa w, uczestnicy u, etapy_wyprawy ew
+WHERE k.idKreatury=u.id_uczestnika
+AND u.id_wyprawy=w.id_wyprawy
+AND w.id_wyprawy=ew.idWyprawy
+AND ew.sektor=7
+AND k.nazwa='Tesciowa'
+and w.id_wyprawy=NEW.id_wyprawy;
+
+IF ile_rekordow > 0
+THEN
+INSERT INTO system_alarmowy VALUES(default,'Tesciowa nadchodzi', default);
+END IF;
+END 
+$$
+
+Zadanie 5
+pkt 1
+DELIMITER $$
+
+
+
+CREATE PROCEDURE srednia_itp(
+OUT srednia FLOAT,
+OUT suma FLOAT,
+OUT maks FLOAT)
+BEGIN
+SELECT avg(udzwig), sum(udzwig), max(udzwig)
+INTO srednia, suma, maks FROM kreatura;
+END
+$$
+
+
+
+DELIMITER ;
