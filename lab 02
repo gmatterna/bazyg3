@@ -1,0 +1,29 @@
+punkt 1
+SELECT pracownik.imie,pracownik.nazwisko,dzial.nazwa FROM pracownik INNER JOIN dzial ON pracownik.dzial=dzial.id_dzialu;
+
+
+punkt 2
+ SELECT towar.nazwa_towaru,kategoria.nazwa_kategori,stan_magazynowy.ilosc FROM towar INNER JOIN kategoria ON towar.kategoria=kategoria.id_kategori INNER JOIN stan_magazynowy ON towar.id_towaru=stan_magazynowy.towar ORDER BY stan_magazynowy.ilosc DESC;
+
+
+punkt 3
+SELECT status_zamowienia.nazwa_statusu_zamowienia,zamowienie.id_zamowienia from zamowienie INNER JOIN status_zamowienia ON status_zamowienia.id_statusu_zamowienia=zamowienie.status_zamowienia WHERE id_statusu_zamowienia=6;
+
+punkt 4
+SELECT * FROM klient as k Join adres_klienta as ak ON k.id_klienta=ak.klient JOIN typ_adresu as ta ON ak.typ_adresu=ta.id_typu WHERE miejscowosc="Olsztyn" and ta.nazwa="podstawowy";
+
+punkt 5
+SELECT jednostka_miary.nazwa,stan_magazynowy.towar from jednostka_miary LEFT JOIN stan_magazynowy ON stan_magazynowy.jm=jednostka_miary.id_jednostki WHERE stan_magazynowy.towar IS NULL;
+
+punkt 6
+SELECT zamowienie.numer_zamowienia,pozycja_zamowienia.cena,kategoria.nazwa_kategori,pozycja_zamowienia.ilosc FROM zamowienie INNER JOIN pozycja_zamowienia ON pozycja_zamowienia.zamowienie=zamowienie.id_zamowienia INNER JOIN towar ON towar.id_towaru=pozycja_zamowienia.towar INNER JOIN kategoria ON towar.kategoria=kategoria.id_kategori  where  year(zamowienie.data_zamowienia)=2018; 
+
+punkt 8
+SELECT * from pozycja_zamowienia as pz JOIN zamowienie as z ON pz.zamowienie=z.id_zamowienia ORDER BY z.data_zamowienia LIMIT 5;
+
+punkt 9 
+SELECT * FROM zamowienie as z LEFT JOIN status_zamowienia as sz ON z.status_zamowienia=sz.id_statusu_zamowienia WHERE nazwa_statusu_zamowienia != "zrealizowane";
+
+
+punkt 10
+SELECT * from adres_klienta WHERE kod NOT LIKE "__-___";
