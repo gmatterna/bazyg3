@@ -1,0 +1,26 @@
+punkt 1
+SELECT imie, nazwisko, data_urodzenia FROM pracownik;
+
+punkt 2
+SELECT imie, nazwisko, TIMESTAMPDIFF(YEAR, data_urodzenia, CURDATE()) AS wiek FROM pracownik;
+
+punkt 3
+SELECT d.nazwa, COUNT(p.id_pracownika) FROM dzial AS d JOIN pracownik AS p ON p.dzial=d.id_dzialu GROUP BY d.nazwa;
+
+punkt 4
+SELECT k.nazwa_kategori, COUNT(s_m.ilosc) FROM kategoria AS k INNER JOIN towar AS t ON t.kategoria=k.id_kategori JOIN stan_magazynowy AS s_m ON t.id_towaru=s_m.towar GROUP BY k.nazwa_kategori;
+
+punkt 5
+SELECT k.nazwa_kategori, GROUP_CONCAT(t.nazwa_towaru) FROM kategoria AS k INNER JOIN towar AS t ON t.kategoria=k.id_kategori GROUP BY k.nazwa_kategori;
+
+punkt 6
+ SELECT Round(SUM(pensja)/count(pensja),2) FROM pracownik;
+ 
+punkt 7
+SELECT id_pracownika, AVG(pensja), TIMESTAMPDIFF(YEAR, data_zatrudnienia, CURDATE()) AS staz FROM pracownik WHERE TIMESTAMPDIFF(YEAR, data_zatrudnienia, CURDATE()) > 5 GROUP BY id_pracownika;
+
+punkt 8
+
+
+punkt 9
+SELECT * FROM zamowienie AS z LEFT JOIN status_zamowienia AS s_z ON z.status_zamowienia=s_z.id_statusu_zamowienia WHERE s_z.id_statusu_zamowienia != 5;
