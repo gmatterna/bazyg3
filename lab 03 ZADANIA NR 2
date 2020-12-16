@@ -1,0 +1,2 @@
+punkt 1
+SELECT dzial.nazwa,min(pracownik.pensja),AVG(pracownik.pensja),MAX(pracownik.pensja) FROM dzial INNER JOIN pracownik ON pracownik.dzial=dzial.id_dzialu Group by pracownik.dzial;
