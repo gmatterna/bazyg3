@@ -20,7 +20,11 @@ punkt 7
 SELECT id_pracownika, AVG(pensja), TIMESTAMPDIFF(YEAR, data_zatrudnienia, CURDATE()) AS staz FROM pracownik WHERE TIMESTAMPDIFF(YEAR, data_zatrudnienia, CURDATE()) > 5 GROUP BY id_pracownika;
 
 punkt 8
-
+select towar.nazwa_towaru, stan_magazynowy.ilosc from towar, stan_magazynowy WHERE towar.id_towaru=stan_magazynowy.towar ORDER BY stan_magazynowy.ilosc ASC LIMIT 10;
 
 punkt 9
-SELECT * FROM zamowienie AS z LEFT JOIN status_zamowienia AS s_z ON z.status_zamowienia=s_z.id_statusu_zamowienia WHERE s_z.id_statusu_zamowienia != 5;
+SELECT z.numer_zamowienia, sum(pz.ilosc*pz.cena) as wartosc from zamowienie z, pozycja_zamowienia pz where z.id_zamowienia=pz.zamowienie and year(z.data_zamowienia)=2017 and quarter(z.data_zamowienia)=1 group by z.numer_zamowienia;
+
+punkt 10
+SELECT p.imie, p.nazwisko, sum(pz.ilosc*pz.cena) as Suma from zamowienie z, pozycja_zamowienia pz, pracownik p where z.id_zamowienia=pz.zamowienie and p.id_pracownika = z.pracownik_id_pracownika group by p.id_pracownika order by Suma desc;
+
