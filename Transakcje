@@ -1,0 +1,74 @@
+Zadanie 10;
+
+SELECT
+p.imie,
+p.nazwisko,
+# p.pensja,
+# p.data_zatrudnienia,
+# (year(now())-year(p.data_zatrudnienia))*12,
+timestampdiff(month,p.data_zatrudnienia,now())*p.pensja as "Pobrane pensje"
+FROM
+pracownik p;
+
+
+Zadanie 9
+
+SELECT
+monthname(p.data_urodzenia) as Miesiąc,
+count(p.id_pracownika) as "Liczba pracowników"
+FROM
+pracownik p
+GROUP BY Miesiąc, month(p.data_urodzenia)
+order by month(p.data_urodzenia) ASC;
+
+Zadanie 8
+
+SELECT
+k.nazwa_kategori,
+sum(t.cena_zakupu*sm.ilosc) as wartosc
+FROM
+towar t,
+kategoria k,
+stan_magazynowy sm
+WHERE
+t.kategoria=k.id_kategori
+AND t.id_towaru=sm.towar
+GROUP BY
+k.nazwa_kategori;
+
+Zadanie 7
+
+SELECT
+year(z.data_zamowienia) as rok,
+sum((pz.ilosc*pz.cena)-(pz.ilosc*t.cena_zakupu))
+FROM
+towar t,
+zamowienie z,
+pozycja_zamowienia pz
+WHERE
+t.id_towaru=pz.towar
+AND z.id_zamowienia=pz.zamowienie
+group by rok;
+
+Zadanie 6
+
+SELECT
+sum((pz.ilosc*pz.cena)-(pz.ilosc*t.cena_zakupu))
+FROM
+towar t,
+zamowienie z,
+pozycja_zamowienia pz,
+status_zamowienia sz
+WHERE
+t.id_towaru=pz.towar
+AND z.id_zamowienia=pz.zamowienie
+AND sz.id_statusu_zamowienia=z.status_zamowienia
+AND sz.nazwa_statusu_zamowienia='zrealizowane';
+
+
+
+
+
+
+
+
